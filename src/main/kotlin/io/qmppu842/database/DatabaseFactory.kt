@@ -1,5 +1,7 @@
-package io.qmppu842
+package io.qmppu842.database
 
+import io.qmppu842.GameEvents
+import io.qmppu842.Players
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
