@@ -7,5 +7,6 @@ import io.qmppu842.plugins.configureRouting
 fun main(args: Array<String>): Unit = EngineMain.main(args)
 
 fun Application.module() {
+    DatabaseFactory.init()
     configureRouting()
 }
