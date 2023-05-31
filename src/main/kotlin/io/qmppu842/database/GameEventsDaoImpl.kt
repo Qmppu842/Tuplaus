@@ -45,3 +45,5 @@ class GameEventsDaoImpl : GameEventsDao {
         }.orderBy(GameEvents.timestamp, SortOrder.DESC).map(::resultRowToGameEvent).firstOrNull()
     }
 }
+
+val gameEventDao = GameEventsDaoImpl()

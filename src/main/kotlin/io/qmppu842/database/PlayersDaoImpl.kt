@@ -2,11 +2,10 @@ package io.qmppu842.database
 
 import io.qmppu842.Player
 import io.qmppu842.Players
+import io.qmppu842.Players.identity
 import io.qmppu842.database.DatabaseFactory.dbQuery
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.update
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.exposed.sql.*
 import java.util.*
 
 class PlayersDaoImpl : PlayersDao {
@@ -26,7 +25,7 @@ class PlayersDaoImpl : PlayersDao {
     }
 
     override suspend fun setBalanceTo(identity: UUID, amount: Int): Boolean = dbQuery {
-        Players.update ({Players.identity eq identity}){
+        Players.update({ Players.identity eq identity }) {
             it[balance] = amount
         } > 0
     }
@@ -35,5 +34,21 @@ class PlayersDaoImpl : PlayersDao {
         Players.select {
             Players.identity eq identity
         }.map(::resultRowToPlayer).singleOrNull()
+    }
+
+    override suspend fun randomPlayer(): Player = dbQuery {
+        Players.selectAll().map(::resultRowToPlayer).random()
+    }
+
+    override suspend fun allPlayers(): List<Player> = dbQuery {
+        Players.selectAll().map(::resultRowToPlayer)
+    }
+}
+
+val playersDao = PlayersDaoImpl().apply {
+    runBlocking {
+        if (allPlayers().isEmpty()) {
+            createNewPlayer("Tester ", 10000)
+        }
     }
 }
