@@ -15,6 +15,8 @@ object DatabaseFactory {
         val database = Database.connect(jdbcURL, driverClassName)
         transaction(database) {
             SchemaUtils.create(Players)
+        }
+        transaction(database) {
             SchemaUtils.create(GameEvents)
         }
     }

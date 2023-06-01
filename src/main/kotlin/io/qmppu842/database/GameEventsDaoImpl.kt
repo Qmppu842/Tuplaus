@@ -12,9 +12,10 @@ import java.util.*
 class GameEventsDaoImpl : GameEventsDao {
     private fun resultRowToGameEvent(row: ResultRow) = GameEvent(
         id = row[GameEvents.id],
-        playerIdentity = row[GameEvents.playerIdentity],
+        playerIdentity = row[GameEvents.playerIdentity].toString(),
         timestamp = row[GameEvents.timestamp],
         bet = row[GameEvents.bet],
+        isPlayerChoiceBig = row[GameEvents.isPlayerChoiceBig],
         endCard = row[GameEvents.endCard],
         winnings = row[GameEvents.winnings],
         comboId = row[GameEvents.comboId]
@@ -24,6 +25,7 @@ class GameEventsDaoImpl : GameEventsDao {
         playerIdent: UUID,
         time: Long,
         bet: Int,
+        isPlayerChoiceBig: Boolean,
         endCard: Int,
         winnings: Int,
         comboId: Int?
@@ -32,6 +34,7 @@ class GameEventsDaoImpl : GameEventsDao {
             it[playerIdentity] = playerIdent
             it[timestamp] = time
             it[GameEvents.bet] = bet
+            it[GameEvents.isPlayerChoiceBig] = isPlayerChoiceBig
             it[GameEvents.endCard] = endCard
             it[GameEvents.winnings] = winnings
             it[GameEvents.comboId] = comboId
