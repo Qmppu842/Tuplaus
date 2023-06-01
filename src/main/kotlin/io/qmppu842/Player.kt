@@ -1,12 +1,14 @@
 package io.qmppu842
 
+import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 import java.util.*
 
 /**
  * @param balance is counted to cent accuracy
  */
-data class Player(val id: Int, val identity: UUID, val name: String, var balance: Int)
+@Serializable
+data class Player(val id: Int, val identity: String, val name: String, var balance: Int)
 
 object Players : Table() {
     val id = integer("id").autoIncrement()

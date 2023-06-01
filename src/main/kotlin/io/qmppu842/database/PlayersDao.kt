@@ -9,4 +9,6 @@ interface PlayersDao {
     suspend fun getPlayerByIdentifier(identity: UUID): Player?
     suspend fun randomPlayer(): Player
     suspend fun allPlayers(): List<Player>
+
+    suspend fun addToBalance(identity: UUID, amount: Int): Boolean
 }
