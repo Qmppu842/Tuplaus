@@ -28,7 +28,7 @@ class GameEventsDaoImpl : GameEventsDao {
         isPlayerChoiceBig: Boolean,
         endCard: Int,
         winnings: Int,
-        comboId: Int?
+        comboId: Int
     ): GameEvent? = dbQuery {
         val insert = GameEvents.insert {
             it[playerIdentity] = playerIdent

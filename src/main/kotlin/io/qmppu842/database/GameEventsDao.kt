@@ -11,7 +11,7 @@ interface GameEventsDao {
         isPlayerChoiceBig: Boolean,
         endCard: Int,
         winnings: Int,
-        comboId: Int?
+        comboId: Int
     ): GameEvent?
 
     suspend fun getLastGameFromPlayer(playerIdentity: UUID): GameEvent?

@@ -9,11 +9,11 @@ data class GameEvent(
     val id: Int = -1,
     val playerIdentity: String,
     val timestamp: Long = getTimeMillis(),
-    val bet: Int,
+    val bet: Int = -1,
     val isPlayerChoiceBig: Boolean,
     val endCard: Int = -1,
     val winnings: Int = 0,
-    val comboId: Int? = null
+    val comboId: Int = -1
 )
 
 object GameEvents : Table() {
@@ -24,7 +24,7 @@ object GameEvents : Table() {
     val isPlayerChoiceBig = bool("isPlayerChoiceBig")
     val endCard = integer("endCard")
     val winnings = integer("winnings")
-    val comboId = reference("combo", id).nullable()
+    val comboId = reference("combo", id)
 
     override val primaryKey = PrimaryKey(id)
 
